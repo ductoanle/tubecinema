@@ -980,7 +980,7 @@ containing a value of this type.
         public static final int tab_unselected_pressed_globalcinema=0x7f020088;
     }
     public static final class id {
-        public static final int ProgressBar01=0x7f040046;
+        public static final int ProgressBar01=0x7f040047;
         public static final int abs__action_bar=0x7f040022;
         public static final int abs__action_bar_container=0x7f040021;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -1027,18 +1027,19 @@ containing a value of this type.
         public static final int channel_name=0x7f040042;
         public static final int channel_released_date=0x7f040044;
         public static final int channel_thumb=0x7f040041;
+        public static final int channel_video_list=0x7f040045;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int empty_message=0x7f040035;
         public static final int fragment_main=0x7f040034;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
-        public static final int loading_text_msg=0x7f040047;
-        public static final int loadingpagination_error=0x7f040048;
-        public static final int loadingpagination_error_refresh_btn=0x7f04004a;
-        public static final int loadingpagination_error_text=0x7f040049;
-        public static final int loadingpagination_loading=0x7f040045;
-        public static final int menu_settings=0x7f04004b;
+        public static final int loading_text_msg=0x7f040048;
+        public static final int loadingpagination_error=0x7f040049;
+        public static final int loadingpagination_error_refresh_btn=0x7f04004b;
+        public static final int loadingpagination_error_text=0x7f04004a;
+        public static final int loadingpagination_loading=0x7f040046;
+        public static final int menu_settings=0x7f040050;
         public static final int movie_genres=0x7f04003f;
         public static final int movie_info=0x7f040039;
         public static final int movie_information=0x7f040037;
@@ -1056,6 +1057,10 @@ containing a value of this type.
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
+        public static final int youtube_video_duration=0x7f04004e;
+        public static final int youtube_video_thumb=0x7f04004c;
+        public static final int youtube_video_title=0x7f04004d;
+        public static final int youtube_view=0x7f04004f;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f080000;
@@ -1088,9 +1093,12 @@ containing a value of this type.
         public static final int channel_fragment=0x7f030018;
         public static final int channel_information=0x7f030019;
         public static final int channel_item=0x7f03001a;
-        public static final int loading_pagination=0x7f03001b;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
-        public static final int sherlock_spinner_item=0x7f03001d;
+        public static final int channel_videos_fragment=0x7f03001b;
+        public static final int loading_pagination=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
+        public static final int youtube_video_item=0x7f03001f;
+        public static final int youtube_view=0x7f030020;
     }
     public static final class menu {
         public static final int activity_global_cinema_main=0x7f0b0000;
@@ -1143,6 +1151,7 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
         public static final int app_name=0x7f09000f;
         public static final int empty_list_message=0x7f090015;
+        public static final int error_player=0x7f09001a;
         public static final int fetching_from_tmdb=0x7f090016;
         public static final int hello_world=0x7f090010;
         public static final int loading=0x7f090012;

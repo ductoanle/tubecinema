@@ -14,5 +14,7 @@
     <string name="tab_channel_information">Information</string>
     <string name="tab_channel_videos">Videos</string>
     <string name="tab_channel_shopping">Shopping</string>
+    
+    <string name="error_player">Error loading Youtube Player</string>
 
 </resources>
