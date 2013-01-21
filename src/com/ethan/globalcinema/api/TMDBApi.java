@@ -35,13 +35,13 @@ public class TMDBApi {
 		return instance;
 	}
 	
-	public List<MovieItem> getPopularMovieList(int page) throws MovieDbException{
-		List<MovieDb> moviesDb = api.getTopRatedMovies(DEFAULT_LANGUAGE, page);
+	public List<MovieItem> getPopularMovieList(String page) throws MovieDbException{
+		List<MovieDb> moviesDb = api.getTopRatedMovies(DEFAULT_LANGUAGE, Integer.parseInt(page));
 		return convertToMovieItem(moviesDb);
 	}
 	
-	public List<MovieItem> searchMovies(String movieName, int page) throws MovieDbException{
-		List<MovieDb> moviesDb = api.searchMovie(movieName, DEFAULT_SEARCH_YEAR, DEFAULT_LANGUAGE, DEFAULT_INCLUDE_ADULT, page);
+	public List<MovieItem> searchMovies(String movieName, String page) throws MovieDbException{
+		List<MovieDb> moviesDb = api.searchMovie(movieName, DEFAULT_SEARCH_YEAR, DEFAULT_LANGUAGE, DEFAULT_INCLUDE_ADULT, Integer.parseInt(page));
 		return convertToMovieItem(moviesDb);
 	}
 	

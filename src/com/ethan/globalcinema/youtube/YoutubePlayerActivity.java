@@ -60,7 +60,7 @@ public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity{
         public void onLoaded(String videoId) {
             playerState = String.format("LOADED %s", videoId);
             player.play();
-            player.setFullscreen(true);
+            player.setShowFullscreenButton(false);
         }
 
         @Override

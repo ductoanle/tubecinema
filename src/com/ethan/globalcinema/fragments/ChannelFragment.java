@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Messenger;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ethan.globalcinema.ChannelActivity;
@@ -26,20 +27,46 @@ import com.ethan.globalcinema.R;
 import com.ethan.globalcinema.adapters.ChannelAdapter;
 import com.ethan.globalcinema.beans.MovieItem;
 import com.ethan.globalcinema.loader.PopularMoviesLoader;
-import com.ethan.globalcinema.loader.SearchMoviesLoader;
-import com.omertron.themoviedbapi.model.MovieDb;
 
 public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<List<MovieItem>>, OnItemClickListener{
 	private static final String TAG = "SearchChannelFragment";
+	public static final String PAGE = "page";
+    private static final String FORCE = "force";
+    private static final String INSTANCE_STATE_CURRENT_PAGE = TAG + ".currentPage";
+    private static final String INSTANCE_STATE_PREVIOUS_TOTAL = TAG + ".previousTotal";
+    private static final String INSTANCE_STATE_LOADING = TAG + ".loading";
+    private static final int PER_PAGE = 15;
 	
 	private ChannelAdapter mAdapter;
-    private AdapterView<ChannelAdapter> mAdapterView;
+    private AdapterView mAdapterView;
     private ImageView refreshButton;
+    private Bundle mBundle;
+    private EndlessScrollListener mScrollListener;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            int currentPage = savedInstanceState.getInt(INSTANCE_STATE_CURRENT_PAGE, EndlessScrollListener.FIRST_PAGE);
+            int previousTotal = savedInstanceState.getInt(INSTANCE_STATE_PREVIOUS_TOTAL, EndlessScrollListener.FIRST_PREVIOUS_TOTAL);
+            boolean loading = savedInstanceState.getBoolean(INSTANCE_STATE_LOADING, false);
+            mScrollListener = new EndlessScrollListener(currentPage, previousTotal, loading);
+        }
+        else {
+            mScrollListener = new EndlessScrollListener();
+        }
+        mBundle = new Bundle();
     }
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+	    super.onSaveInstanceState(outState);
+	    if (mScrollListener != null){
+            outState.putInt(INSTANCE_STATE_CURRENT_PAGE, mScrollListener.getCurrentPage());
+            outState.putInt(INSTANCE_STATE_PREVIOUS_TOTAL, mScrollListener.getPreviousTotal());
+            outState.putBoolean(INSTANCE_STATE_LOADING, mScrollListener.getLoading());
+        }
+	}
 	
 	@Override
 	protected void initResources(View root) {
@@ -47,21 +74,59 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
         errorIndicator = root.findViewById(R.id.loadingpagination_error);
         emptyListMessage = (TextView)root.findViewById(R.id.empty_message);
 	}
+	
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    if (mScrollListener.getPreviousTotal() == (mScrollListener.getCurrentPage() - 1) * PER_PAGE){
+            restartLoader(mScrollListener.getCurrentPage());
+        }
+	}
     
     @Override
     public void onActivityCreated(Bundle saveInstanceState){
         super.onActivityCreated(saveInstanceState);
-        callLoader(0, false, null);
-    }
-
-    private void refreshLoadingPage(){
-        callLoader(0, true, null);
+        mBundle.putString(PAGE, "1");
+        callLoader(0, mBundle, this);
     }
     
-    private void callLoader(int loaderId, boolean force, Bundle params){
+    @Override
+    public void onPause() {
+        super.onPause();
+        destroyLoader();
+    }
+    
+    private void restartLoader(int page){
+        // Start loader
+        mBundle.putString(PAGE, "" + page);
+        callLoader(0, mBundle, this);
+    }
+    
+    private void destroyLoader(){
+        getLoaderManager().destroyLoader(0);
+    }
+    
+    public void refreshLoadingPage(){
+        restartLoader(mScrollListener.getCurrentPage());
+        mScrollListener.setLoading(true);
+    }
+
+    public void refresh(boolean force) {
+        mAdapter.clear();
+        mBundle.putString(PAGE, "1");
+        mBundle.putBoolean(FORCE, force);
+        callLoader(0, mBundle, this);
+        mScrollListener.reset();
+        mAdapterView.setVisibility(View.GONE);
+    }
+    
+    private void callLoader(int id, Bundle bundle, LoaderCallbacks<List<MovieItem>> callback){
         LoaderManager manager = getLoaderManager();
-        if (manager.getLoader(loaderId) == null && mAdapter.getCount() == 0){
-            manager.initLoader(loaderId, params, this);
+        if (manager.getLoader(id) != null){
+            manager.restartLoader(id, bundle, callback);
+        }
+        else{
+            manager.initLoader(id, bundle, callback);
         }
     }
     
@@ -75,6 +140,7 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
         mAdapterView.setVerticalFadingEdgeEnabled(true);
         mAdapterView.setAdapter(mAdapter);
         mAdapterView.setOnItemClickListener(this);
+        ((ListView)mAdapterView).setOnScrollListener(mScrollListener);
         
         refreshButton = (ImageView)root.findViewById(R.id.loadingpagination_error_refresh_btn);
         refreshButton.setOnClickListener(new OnClickListener(){
@@ -103,7 +169,7 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
     
     @Override
     public Loader<List<MovieItem>> onCreateLoader(int loader, Bundle params) {
-        return new PopularMoviesLoader(getActivity(), new Messenger(new Handler(this)), 0);
+        return new PopularMoviesLoader(getActivity(), new Messenger(new Handler(this)), params.getString(PAGE));
     }
     
     @Override
@@ -111,19 +177,81 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
             List<MovieItem> movies) {
         if (movies != null && !movies.isEmpty()) {
             mAdapter.setNotifyOnChange(false);
-            mAdapter.clear();
-            if (movies != null && movies.size() > 0){
-                for(MovieItem movie:movies){
-                    mAdapter.add(movie);
-                }
+            for(MovieItem movie:movies){
+                mAdapter.add(movie);
             }
             mAdapter.notifyDataSetChanged();
         }
-        getLoaderManager().destroyLoader(0);
     }
 
     @Override
     public void onLoaderReset(Loader<List<MovieItem>> loader) {
         mAdapter.clear();
+    }
+    
+    class EndlessScrollListener implements OnScrollListener {
+        public static final int FIRST_PAGE = 1;
+        private static final int VISIBLE_THRESHOLD = 5;
+        public static final int FIRST_PREVIOUS_TOTAL = 0;
+
+        private int currentPage;
+        private int previousTotal;
+        private boolean loading = true;
+
+        public EndlessScrollListener(){
+            super();
+            this.currentPage = FIRST_PAGE;
+            this.previousTotal = FIRST_PREVIOUS_TOTAL;
+        }
+
+        public EndlessScrollListener(int currentPage, int previousTotal, boolean loading){
+            this.currentPage = currentPage;
+            this.previousTotal = previousTotal;
+            this.loading = loading;
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem,
+                int visibleItemCount, int totalItemCount) {
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+            if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + VISIBLE_THRESHOLD) && totalItemCount != 0) {
+                // I load the next page of gigs using a background task,
+                // but you can call any function here.
+                currentPage++;
+                restartLoader(currentPage);
+                loading = true;
+            }
+        }
+
+        public void reset(){
+            this.currentPage = FIRST_PAGE;
+            this.previousTotal = FIRST_PREVIOUS_TOTAL;
+            this.loading = true;
+        }
+
+        public int getCurrentPage(){
+            return currentPage;
+        }
+
+        public int getPreviousTotal(){
+            return previousTotal;
+        }
+
+        public boolean getLoading(){
+            return loading;
+        }
+
+        public void setLoading(boolean loading){
+            this.loading = loading;
+        }
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+        }
     }
 }

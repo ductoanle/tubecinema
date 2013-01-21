@@ -18,9 +18,9 @@ public class SearchMoviesLoader extends AsyncTaskLoader<List<MovieItem>> {
 	
 	private Messenger messenger;
 	private String searchTitle;
-	private int page;
+	private String page;
 	
-	public SearchMoviesLoader(Context context, Messenger messenger, String searchTitle, int page) {
+	public SearchMoviesLoader(Context context, Messenger messenger, String searchTitle, String page) {
 		super(context);
 		this.messenger = messenger;
 		this.searchTitle = searchTitle;

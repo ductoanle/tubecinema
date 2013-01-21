@@ -17,9 +17,9 @@ public class PopularMoviesLoader extends AsyncTaskLoader<List<MovieItem>> {
 	private static final String TAG = "MovieSearchLoader";
 	
 	private Messenger messenger;
-	private int page;
+	private String page;
 	
-	public PopularMoviesLoader(Context context, Messenger messenger, int page) {
+	public PopularMoviesLoader(Context context, Messenger messenger, String page) {
 		super(context);
 		this.messenger = messenger;
 		this.page = page;
