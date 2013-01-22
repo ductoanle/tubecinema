@@ -6,7 +6,8 @@
     <string name="menu_settings">Settings</string>
     
     <string name="loading">Loading...</string>
-    <string name="popular_movies">Popular Movies</string>
+    <string name="browse_movies">Browse</string>
+    <string name="recommended_movies">Recommended</string>
     <string name="no_network_connection">There\'s no network connection right now. Please try again later.</string>
     <string name="empty_list_message">No results found</string>
     <string name="fetching_from_tmdb">Fetching content from remote site</string>

@@ -44,9 +44,9 @@ public class ChannelAdapter extends ArrayAdapter<MovieDb> {
 			ViewHolder holder = new ViewHolder();
 			holder.thumb = (ImageView)convertView.findViewById(R.id.channel_thumb);
 			holder.title = (TextView)convertView.findViewById(R.id.channel_name);
-			convertView.setTag(R.string.popular_movies ,holder);
+			convertView.setTag(R.string.browse_movies ,holder);
 		}
-		ViewHolder holder = (ViewHolder)convertView.getTag(R.string.popular_movies); 
+		ViewHolder holder = (ViewHolder)convertView.getTag(R.string.browse_movies); 
 
 		// Set view content
 		SuperImageLoader.getInstance(getContext()).loadImage(item.getPosterThumb(), holder.thumb, R.color.white, ScaleType.FIT_CENTER, time_1_day);

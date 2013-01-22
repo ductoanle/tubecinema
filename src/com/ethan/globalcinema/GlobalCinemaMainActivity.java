@@ -41,9 +41,14 @@ public class GlobalCinemaMainActivity extends BaseActionBarActivity {
 	public void addTabs(int position){
 		Tab tab;
 		tab = mActionBar
+                .newTab()
+                .setText(R.string.recommended_movies)
+                .setTabListener(new TabListener<ChannelFragment>(getString(R.string.recommended_movies), ChannelFragment.class));
+                mActionBar.addTab(tab);
+		tab = mActionBar
 				.newTab()
-				.setText(R.string.popular_movies)
-				.setTabListener(new TabListener<ChannelFragment>(getString(R.string.popular_movies), ChannelFragment.class));
+				.setText(R.string.browse_movies)
+				.setTabListener(new TabListener<ChannelFragment>(getString(R.string.browse_movies), ChannelFragment.class));
 				mActionBar.addTab(tab);
 
 		mActionBar.addTab(tab);

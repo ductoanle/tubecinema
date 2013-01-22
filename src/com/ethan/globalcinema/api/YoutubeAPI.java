@@ -30,9 +30,9 @@ public class YoutubeAPI {
     private static final String DURATION_MEDIUM = "medium";
     private static final String DURATION_ANY = "any";
     private static final String[] COMMON_WORDS = {"the", "a", "an", "and", "or"};
-    
+
     private static final String ANAMATION_TYPE = "animation";
-    
+
     private static final String ALT_JSON = "json";
     private static final String VERSION_TWO = "2";
 
@@ -64,36 +64,36 @@ public class YoutubeAPI {
         int score;
         for (YoutubeVideo video: videos) {
             score = 0;
-            Log.i(TAG, "Video title is " + video.getTitle() + " duration is " + video.getDuration());
-            if (video.getTitle().contains(title)) {
+            if (video.getTitle().toLowerCase().contains(title.toLowerCase())) {
                 score += StringUtils.split(title).length + 1;
             }
-            else if (video.getTitle().contains(originalTitle)) {
+            else if (video.getTitle().toLowerCase().contains(originalTitle.toLowerCase())) {
                 score += StringUtils.split(originalTitle).length + 1;
             }
             else {
                 int titleScore = 0;
                 int originalTitleScore = 0;
-                String[] words = StringUtils.split(title);
+                List<String> words = getTestWords(title);
                 for (String word: words) {
-                    if (!isCommonWord(word)) {
-                        if (video.getTitle().contains(word)) {
-                            titleScore++;
-                        }
-                        else {
-                            titleScore--;
-                        }
+                    
+                    if (video.getTitle().toLowerCase().contains(word)) {
+                        Log.i(TAG, "+ with word " + word);
+                        titleScore++;
+                    }
+                    else {
+                        Log.i(TAG, "- with word " + word);
+                        titleScore--;
                     }
                 }
-                words = StringUtils.split(originalTitle);
+                words = getTestWords(originalTitle);
                 for (String word: words) {
-                    if (!isCommonWord(word)) {
-                        if (video.getTitle().contains(word)) {
-                            originalTitleScore++;
-                        }
-                        else {
-                            originalTitleScore--;
-                        }
+                    if (video.getTitle().toLowerCase().contains(word)) {
+                        Log.i(TAG, "+ with word " + word);
+                        originalTitleScore++;
+                    }
+                    else {
+                        originalTitleScore--;
+                        Log.i(TAG, "- with word " + word);
                     }
                 }
                 if (titleScore > originalTitleScore) {
@@ -103,25 +103,34 @@ public class YoutubeAPI {
                     score += originalTitleScore;
                 }
             }
-            
+
             int durationInMinutes  = video.getDuration()/60;
-            if (durationInMinutes > duration - 10 && durationInMinutes < duration + 10) {
+            if (durationInMinutes > duration - 15 && durationInMinutes < duration + 15) {
                 score += 10;
             }
             if (score >= 10 && score > bestScore) {
                 bestMatchedVideo = video; 
             }
+            Log.i(TAG, "Title is " + video.getTitle() + " score " + score);
         }
         return bestMatchedVideo;
     }
-    
-    private boolean isCommonWord(String word) {
-        for (String commonWord : COMMON_WORDS) {
-            if(word.toLowerCase().equals(commonWord)) {
-                return true;
+
+    private List<String> getTestWords(String str) {
+        List<String> words = new ArrayList<String>();
+        str = str.toLowerCase().replace(",", " ").replace("-", " ").replace("'", " ");
+        String[] strs = StringUtils.split(str);
+        for (String s: strs) {
+            boolean isCommon = false;
+            for (String commonWord : COMMON_WORDS) {
+                if (s.equals(commonWord)) {
+                    isCommon = true;
+                    break;
+                }
             }
+            if (!isCommon) words.add(s);
         }
-        return false;
+        return words; 
     }
 
     private List<YoutubeVideo> queryForYouTubeVideo(String query, String duration ) throws Exception {
@@ -135,9 +144,9 @@ public class YoutubeAPI {
         if (!duration.equals(DURATION_ANY)) {
             params.put(DURATION, DURATION_LONG);
         }
-        
+
         String response = NetworkUtils.getResponse(BASE_API, null, NetworkUtils.METHOD_GET, params);
-        
+
         JSONObject jsonObject = new JSONObject(response);
         JSONArray jsonArray = jsonObject.getJSONObject("feed").getJSONArray("entry");
         YoutubeVideo video;

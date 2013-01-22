@@ -8,7 +8,6 @@ import com.google.android.youtube.player.YouTubePlayer.ErrorReason;
 import com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-
 public class YoutubePlayerActivity extends YouTubeFailureRecoveryActivity{
 
     private static final String TAG = "YoutubePlayerActivity";
