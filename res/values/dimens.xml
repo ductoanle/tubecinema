@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="pager_dots_height">28dp</dimen>
+
+    <!-- Standard sizes -->
+    <dimen name="divider_height">2dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_tiny">2dp</dimen>
+    <dimen name="input_width">304dp</dimen>
+
+    <!-- Featured items -->
+
+    <!-- Image sizes (1.38 aspect ratio) -->
+    <dimen name="channel_thumbnail_width">115dp</dimen>
+    <dimen name="channel_thumbnail_height">84dp</dimen>
+    <dimen name="episode_thumbnail_width">115dp</dimen>
+    <dimen name="episode_thumbnail_height">84dp</dimen>
+    <dimen name="masthead_width">350dp</dimen>
+    <dimen name="masthead_height">254dp</dimen>
+
+    <!-- in languages selection page -->
+    <dimen name="language_name_textSize">25sp</dimen>
+    <dimen name="language_name_padding_top">10dp</dimen>
+    <dimen name="language_name_padding_bottom">10dp</dimen>
+    <dimen name="language_name_padding_left">5dp</dimen>
+
+    <!-- tab items -->
+    <dimen name="tabitem_width">112dp</dimen>
+    <dimen name="tabitem_icon_size">27dp</dimen>
+
+    <!-- in row of the listview -->
+    <dimen name="language_margin_left">4dp</dimen>
+    <dimen name="cell_padding_top_bottom">2dp</dimen>
+    <dimen name="cell_padding_left_right">6dp</dimen>
+    <dimen name="iv_show_type_height">20dp</dimen>
+    <dimen name="iv_show_type_width">26dp</dimen>
+    <dimen name="iv_show_type_height_tablet">27dp</dimen>
+    <dimen name="iv_show_type_width_tablet">36dp</dimen>
+    <dimen name="title_text_size">15sp</dimen>
+    <dimen name="singer_text_size">13sp</dimen>
+    <dimen name="country_margin_left">2dp</dimen>
+    <dimen name="created_time_textSize">12sp</dimen>
+
+    <!-- filter buttons -->
+    <dimen name="filter_button_width">156dp</dimen>
+    <dimen name="filter_bar_height">64dp</dimen>
+
+    <!-- in news row -->
+    <dimen name="new_cell_padding_top">2dp</dimen>
+    <dimen name="new_cell_padding_bottom">5dp</dimen>
+
+
+    <!-- in channel info page -->
+    <dimen name="share_method_textSize"> 23sp</dimen>
+    <dimen name="share_method_margin_left">7dp</dimen>
+    <dimen name="share_row_padding">5dp</dimen>
+    <dimen name="share_row_height">30dp</dimen>
+
+    <!-- Subtitle font size -->
+    <dimen name="subtitle_size">20sp</dimen>
+    <dimen name="subtitle_padding">20dp</dimen>
+
+    <!-- App Rater -->
+    <dimen name="app_rater_width">250dp</dimen>
+    
+    <!-- Invite Facebook Friend -->
+    <dimen name="invite_friend_text_top_margin">50dp</dimen>
+    <dimen name="invite_friend_big_text_size">18sp</dimen>
+    <dimen name="invite_friend_small_text_size">15sp</dimen>
+    <dimen name="invite_friend_list_text_size">15sp</dimen>
+    <dimen name="invite_friend_margin_bottom">20dp</dimen>
+    <dimen name="invite_other_friends_margin_bottom">18dp</dimen>
+    <dimen name="invite_friend_button_height">35dp</dimen>
+    <dimen name="invite_friend_facebook_pic_size">52dp</dimen>
+    <dimen name="invite_friend_item_margin">5dp</dimen>
+    <dimen name="invite_friend_list_margin_left">10dp</dimen>
+    <dimen name="invite_friend_list_margin_right">10dp</dimen>
+    
+    <!--  Invite friend from contacts -->
+    <dimen name="invite_friend_contact_main">18sp</dimen>
+    <dimen name="invite_friend_contact_sub">14sp</dimen>
+</resources>

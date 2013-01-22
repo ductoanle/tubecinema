@@ -19,14 +19,16 @@
  */
 package com.omertron.themoviedbapi.tools;
 
-import com.omertron.themoviedbapi.TheMovieDbApi;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
+
+import com.omertron.themoviedbapi.TheMovieDbApi;
 
 /**
  * The API URL that is used to construct the API call

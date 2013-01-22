@@ -18,17 +18,17 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.ethan.globalcinema.ChannelActivity;
+import com.ethan.globalcinema.ChannelLoadActivity;
 import com.ethan.globalcinema.R;
 import com.ethan.globalcinema.adapters.ChannelAdapter;
-import com.ethan.globalcinema.beans.MovieItem;
 import com.ethan.globalcinema.loader.PopularMoviesLoader;
+import com.omertron.themoviedbapi.model.MovieDb;
 
-public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<List<MovieItem>>, OnItemClickListener{
+public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<List<MovieDb>>, OnItemClickListener{
 	private static final String TAG = "SearchChannelFragment";
 	public static final String PAGE = "page";
     private static final String FORCE = "force";
@@ -120,7 +120,7 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
         mAdapterView.setVisibility(View.GONE);
     }
     
-    private void callLoader(int id, Bundle bundle, LoaderCallbacks<List<MovieItem>> callback){
+    private void callLoader(int id, Bundle bundle, LoaderCallbacks<List<MovieDb>> callback){
         LoaderManager manager = getLoaderManager();
         if (manager.getLoader(id) != null){
             manager.restartLoader(id, bundle, callback);
@@ -135,12 +135,12 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.channel_fragment, container, false);
         initResources(root);
-        mAdapter = new ChannelAdapter(getActivity(), new ArrayList<MovieItem>());
+        mAdapter = new ChannelAdapter(getActivity(), new ArrayList<MovieDb>());
         mAdapterView = (AdapterView<ChannelAdapter>)root.findViewById(R.id.channel_list);
         mAdapterView.setVerticalFadingEdgeEnabled(true);
         mAdapterView.setAdapter(mAdapter);
         mAdapterView.setOnItemClickListener(this);
-        ((ListView)mAdapterView).setOnScrollListener(mScrollListener);
+        ((GridView)mAdapterView).setOnScrollListener(mScrollListener);
         
         refreshButton = (ImageView)root.findViewById(R.id.loadingpagination_error_refresh_btn);
         refreshButton.setOnClickListener(new OnClickListener(){
@@ -159,25 +159,24 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
     
     @Override
     public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-    	MovieItem movie = mAdapter.getItem(position);
+    	MovieDb movie = mAdapter.getItem(position);
     	Intent intent = new Intent();
-    	intent.putExtra(ChannelActivity.MOVIE_ID_EXTRA, movie.getId());
-    	intent.putExtra(ChannelActivity.MOVIE_TITLE_EXTRA, movie.getTitle());
-    	intent.setClass(getActivity(), ChannelActivity.class);
+    	intent.putExtra(ChannelLoadActivity.MOVIE_ID_EXTRA, movie.getId());
+    	intent.setClass(getActivity(), ChannelLoadActivity.class);
     	startActivity(intent);
     }
     
     @Override
-    public Loader<List<MovieItem>> onCreateLoader(int loader, Bundle params) {
+    public Loader<List<MovieDb>> onCreateLoader(int loader, Bundle params) {
         return new PopularMoviesLoader(getActivity(), new Messenger(new Handler(this)), params.getString(PAGE));
     }
     
     @Override
-    public void onLoadFinished(Loader<List<MovieItem>> loader,
-            List<MovieItem> movies) {
+    public void onLoadFinished(Loader<List<MovieDb>> loader,
+            List<MovieDb> movies) {
         if (movies != null && !movies.isEmpty()) {
             mAdapter.setNotifyOnChange(false);
-            for(MovieItem movie:movies){
+            for(MovieDb movie:movies){
                 mAdapter.add(movie);
             }
             mAdapter.notifyDataSetChanged();
@@ -185,8 +184,7 @@ public class ChannelFragment extends LoaderFragment implements LoaderCallbacks<L
     }
 
     @Override
-    public void onLoaderReset(Loader<List<MovieItem>> loader) {
-        mAdapter.clear();
+    public void onLoaderReset(Loader<List<MovieDb>> loader) {
     }
     
     class EndlessScrollListener implements OnScrollListener {

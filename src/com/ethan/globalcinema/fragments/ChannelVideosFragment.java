@@ -25,6 +25,7 @@ import com.ethan.globalcinema.adapters.YoutubeVideoAdapter;
 import com.ethan.globalcinema.beans.YoutubeVideo;
 import com.ethan.globalcinema.loader.YoutubeSearchLoader;
 import com.ethan.globalcinema.youtube.YoutubePlayerActivity;
+import com.omertron.themoviedbapi.model.MovieDb;
 
 public class ChannelVideosFragment extends LoaderFragment implements LoaderCallbacks<List<YoutubeVideo>>, OnItemClickListener {
 
@@ -99,7 +100,8 @@ public class ChannelVideosFragment extends LoaderFragment implements LoaderCallb
     
     @Override
     public Loader<List<YoutubeVideo>> onCreateLoader(int loader, Bundle params) {
-        return new YoutubeSearchLoader(getActivity(), ((ChannelActivity)getActivity()).getMovieTitle(), new Messenger(new Handler(this)));
+    	MovieDb movie = ((ChannelActivity)getActivity()).getMovie();
+        return new YoutubeSearchLoader(getActivity(), movie.getTitle(), movie.getRuntime(), new Messenger(new Handler(this)));
     }
     
     @Override

@@ -8,11 +8,11 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.ethan.globalcinema.api.TMDBApi;
-import com.ethan.globalcinema.beans.MovieItem;
 import com.ethan.globalcinema.utils.MessengerUtils;
 import com.omertron.themoviedbapi.MovieDbException;
+import com.omertron.themoviedbapi.model.MovieDb;
 
-public class SearchMoviesLoader extends AsyncTaskLoader<List<MovieItem>> {
+public class SearchMoviesLoader extends AsyncTaskLoader<List<MovieDb>> {
 	
 	private static final String TAG = "MovieSearchLoader";
 	
@@ -34,9 +34,9 @@ public class SearchMoviesLoader extends AsyncTaskLoader<List<MovieItem>> {
 	}
 	
 	@Override
-	public List<MovieItem> loadInBackground() {
+	public List<MovieDb> loadInBackground() {
 		try{
-			List<MovieItem> movies = TMDBApi.getInstance().searchMovies(searchTitle, page);
+			List<MovieDb> movies = TMDBApi.getInstance().searchMovies(searchTitle, page);
 			if (movies == null || movies.isEmpty()){
 				MessengerUtils.sendMessage(messenger, MessengerUtils.UPDATE_EMPTY);
 			}

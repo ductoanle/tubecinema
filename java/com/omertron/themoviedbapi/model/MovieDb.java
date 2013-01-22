@@ -19,19 +19,26 @@
  */
 package com.omertron.themoviedbapi.model;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
-/**
- * Movie Bean
- *
- * @author stuart.boston
- */
-public class MovieDb implements Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
 
+import com.ethan.globalcinema.api.TMDBApi;
+import com.ethan.globalcinema.utils.Utils;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class MovieDb implements Serializable, Parcelable {
+	
+	private static final String TAG = "MovieDb";
     private static final long serialVersionUID = 1L;
     /*
      * Logger
@@ -86,6 +93,86 @@ public class MovieDb implements Serializable {
     private int voteCount;
     @JsonProperty("status")
     private String status;
+    
+    public MovieDb(){}
+    
+    public MovieDb(Parcel in){
+    	super();
+    	readFromParcel(in);
+    }
+    
+    public String getGenresListAsText(){
+		String genres = "";
+		List<Genre> genreList = getGenres();
+		if (Utils.isListValid(genreList)){
+			for (int i = 0; i < genreList.size(); i++){
+				genres += getGenres().get(i).getName();
+				if (i < genreList.size() - 1){
+					genres += ", ";
+				}
+			}
+		}
+		
+		return genres;
+	}
+	
+	public String getSpokenLanguagesListAsText(){
+		String spokenLanguages = "";
+		List<Language> languages = getSpokenLanguages();
+		if (Utils.isListValid(languages)){
+			for (int i = 0; i < languages.size(); i++){
+				spokenLanguages += languages.get(i).getName();
+				if (i < languages.size() - 1){
+					spokenLanguages += ", ";
+				}
+			}
+		}
+		return spokenLanguages;
+	}
+	
+	public String getReleasedYear(){
+		return StringUtils.substring(releaseDate, 0, 4);
+	}
+	
+	public String getOriginalTitleText(){
+		if (originalTitle.equals(title)){
+			return originalTitle;
+		}
+		return "";
+	}
+	
+	public String getRuntimeAsHourMinFormat(){
+		int hour = runtime / 60;
+		int min = runtime % 60;
+		if (hour > 0){
+			return hour + " hours " + min + " mins";
+		}
+		else{
+			return min + "mins";
+		}
+	}
+	
+	public String getPosterThumb(){
+		try{
+			URL url = TMDBApi.getInstance().createThumbnailPoster(getPosterPath());
+			return url.toString();
+		}
+		catch (Exception e){
+			Log.e(TAG, e.getMessage(), e);
+		}
+		return null;
+	}
+	
+	public String getPosterFull(){
+		try{
+			URL url = TMDBApi.getInstance().createFullPoster(getPosterPath());
+			return url.toString();
+		}
+		catch (Exception e){
+			Log.e(TAG, e.getMessage(), e);
+		}
+		return null;
+	}
 
     // <editor-fold defaultstate="collapsed" desc="Getter methods">
     public String getBackdropPath() {
@@ -351,4 +438,75 @@ public class MovieDb implements Serializable {
         sb.append("]]");
         return sb.toString();
     }
+    
+    @Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel out, int flag) {
+		out.writeInt(this.id);
+		out.writeString(this.title);
+		out.writeString(this.originalTitle);
+		out.writeFloat(this.popularity);
+		out.writeString(this.posterPath);
+		out.writeString(this.releaseDate);
+		out.writeByte((byte) (adult ? 1 : 0));
+		out.writeLong(this.budget);
+		out.writeString(this.homepage);
+		out.writeString(this.imdbID);
+		out.writeString(this.overview);
+		out.writeLong(this.revenue);
+		out.writeInt(this.runtime);
+		out.writeString(this.tagline);
+		out.writeFloat(this.voteAverage);
+		out.writeInt(this.voteCount);
+		out.writeString(this.status);
+		out.writeString(this.backdropPath);
+		out.writeList(this.productionCompanies);
+		out.writeList(this.productionCountries);
+		out.writeList(this.genres);
+		out.writeList(this.spokenLanguages);
+	}
+
+	public void readFromParcel(Parcel in){
+		this.id = in.readInt();
+		this.title = in.readString();
+		this.originalTitle = in.readString();
+		this.popularity = in.readFloat();
+		this.posterPath = in.readString();
+		this.releaseDate = in.readString();
+		this.adult = in.readByte() == 1 ? true: false;
+		this.budget = in.readLong();
+		this.homepage = in.readString();
+		this.imdbID = in.readString();
+		this.overview = in.readString();
+		this.revenue = in.readLong();
+		this.runtime = in.readInt();
+		this.tagline = in.readString();
+		this.voteAverage = in.readFloat();
+		this.voteCount = in.readInt();
+		this.status = in.readString();
+		this.backdropPath = in.readString();
+		this.productionCompanies = new ArrayList<ProductionCompany>();
+		in.readList(productionCompanies,null);
+		this.productionCountries = new ArrayList<ProductionCountry>();
+		in.readList(productionCountries,null);
+		this.genres = new ArrayList<Genre>();
+		in.readList(genres, null);
+		this.spokenLanguages = new ArrayList<Language>();
+		in.readList(spokenLanguages, null);
+	}
+
+	public static final Parcelable.Creator<MovieDb> CREATOR = new Parcelable.Creator<MovieDb>() {
+		public MovieDb createFromParcel(Parcel in) {
+			return new MovieDb(in);
+		}
+
+		public MovieDb[] newArray(int size) {
+			return new MovieDb[size];
+		}
+	};
+
 }

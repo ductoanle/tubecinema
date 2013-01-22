@@ -6,46 +6,41 @@ import android.os.Bundle;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.ethan.globalcinema.fragments.ChannelInformationFragment;
 import com.ethan.globalcinema.fragments.ChannelVideosFragment;
+import com.omertron.themoviedbapi.model.MovieDb;
 
 public class ChannelActivity extends BaseActionBarActivity {
+	
 	private static final String TAG = "ChannelActivity";
-	
 	private static final String CURRENT_SELECTED_TAB = TAG + ".selectedTab";
-	public static final String MOVIE_ID_EXTRA = "movie_id";
-	public static final String MOVIE_TITLE_EXTRA = "movie_title";
-	
-	private int movieId;
-	private String movieTitle;
+	public static final String MOVIE_EXTRA = "movie";
+	private MovieDb movie;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		getSherlockActionBar();
 		loadMovie();
 		int position = 0;
 		if (savedInstanceState != null) {
 			position = savedInstanceState.getInt(CURRENT_SELECTED_TAB);
 		}
-		addTabs(position);
+		if(movie!=null){
+			addTabs(position);
+		}
+		getSherlockActionBar();
 	}
 	
 	public void loadMovie(){
 		Intent intent = getIntent();
-		if (intent.getExtras().containsKey(MOVIE_ID_EXTRA) && intent.getExtras().containsKey(MOVIE_TITLE_EXTRA)){
-			movieId = intent.getExtras().getInt(MOVIE_ID_EXTRA);
-			movieTitle = intent.getExtras().getString(MOVIE_TITLE_EXTRA);
+		if (intent.getExtras().containsKey(MOVIE_EXTRA)){
+			movie = intent.getExtras().getParcelable(MOVIE_EXTRA);
 		}
 		else {
 			finish();
 		}
 	}
 	
-	public int getMovieId(){
-		return movieId;
-	}
-	
-	public String getMovieTitle(){
-		return movieTitle;
+	public MovieDb getMovie(){
+		return movie;
 	}
 	
 	public void addTabs(int position){
@@ -69,5 +64,4 @@ public class ChannelActivity extends BaseActionBarActivity {
 			actionBar.setSelectedNavigationItem(position);
 		}
 	}
-}
-
+}	

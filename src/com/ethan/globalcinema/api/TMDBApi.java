@@ -1,13 +1,8 @@
 package com.ethan.globalcinema.api;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
-import android.net.Uri;
-import android.util.Log;
-
-import com.ethan.globalcinema.beans.MovieItem;
 import com.omertron.themoviedbapi.MovieDbException;
 import com.omertron.themoviedbapi.TheMovieDbApi;
 import com.omertron.themoviedbapi.model.MovieDb;
@@ -35,23 +30,19 @@ public class TMDBApi {
 		return instance;
 	}
 	
-	public List<MovieItem> getPopularMovieList(String page) throws MovieDbException{
+	public List<MovieDb> getPopularMovieList(String page) throws MovieDbException{
 		List<MovieDb> moviesDb = api.getTopRatedMovies(DEFAULT_LANGUAGE, Integer.parseInt(page));
-		return convertToMovieItem(moviesDb);
+		return moviesDb;
 	}
 	
-	public List<MovieItem> searchMovies(String movieName, String page) throws MovieDbException{
+	public List<MovieDb> searchMovies(String movieName, String page) throws MovieDbException{
 		List<MovieDb> moviesDb = api.searchMovie(movieName, DEFAULT_SEARCH_YEAR, DEFAULT_LANGUAGE, DEFAULT_INCLUDE_ADULT, Integer.parseInt(page));
-		return convertToMovieItem(moviesDb);
+		return moviesDb;
 	}
 	
-	public MovieItem getMovieInfo(int movieId) throws MovieDbException{
+	public MovieDb getMovieInfo(int movieId) throws MovieDbException{
 		MovieDb movieDb = api.getMovieInfo(movieId, DEFAULT_LANGUAGE);
-		if (movieDb != null){
-			Log.i(TAG, "movie info is "  + movieDb);
-			return new MovieItem(movieDb);
-		}
-		return null;
+		return movieDb;
 	}
 	
 	public URL createThumbnailPoster(String path) throws MovieDbException{
@@ -60,15 +51,5 @@ public class TMDBApi {
 	
 	public URL createFullPoster(String path) throws MovieDbException{
 		return api.createImageUrl(path, api.getConfiguration().getPosterSizes().get(3));
-	}
-	
-	private List<MovieItem> convertToMovieItem(List<MovieDb> moviesDb){
-		List<MovieItem> movies = new ArrayList<MovieItem>();
-		for (MovieDb movie: moviesDb){
-			if (movie != null){
-				movies.add(new MovieItem(movie));
-			}
-		}
-		return movies;
 	}
 }

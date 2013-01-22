@@ -19,9 +19,10 @@
  */
 package com.omertron.themoviedbapi.model;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.log4j.Logger;
 
 public class ChangeItem {
 

@@ -839,6 +839,84 @@ containing a value of this type.
  Minimum width for an action button in the menu area of an action bar 
          */
         public static final int action_button_min_width=0x7f070010;
+        /**  App Rater 
+         */
+        public static final int app_rater_width=0x7f070038;
+        public static final int cell_padding_left_right=0x7f070025;
+        public static final int cell_padding_top_bottom=0x7f070024;
+        public static final int channel_thumbnail_height=0x7f070018;
+        /**  Featured items 
+ Image sizes (1.38 aspect ratio) 
+         */
+        public static final int channel_thumbnail_width=0x7f070017;
+        public static final int country_margin_left=0x7f07002c;
+        public static final int created_time_textSize=0x7f07002d;
+        /**  Standard sizes 
+         */
+        public static final int divider_height=0x7f070012;
+        public static final int episode_thumbnail_height=0x7f07001a;
+        public static final int episode_thumbnail_width=0x7f070019;
+        public static final int filter_bar_height=0x7f07002f;
+        /**  filter buttons 
+         */
+        public static final int filter_button_width=0x7f07002e;
+        public static final int input_width=0x7f070016;
+        public static final int invite_friend_big_text_size=0x7f07003a;
+        public static final int invite_friend_button_height=0x7f07003f;
+        /**   Invite friend from contacts 
+         */
+        public static final int invite_friend_contact_main=0x7f070044;
+        public static final int invite_friend_contact_sub=0x7f070045;
+        public static final int invite_friend_facebook_pic_size=0x7f070040;
+        public static final int invite_friend_item_margin=0x7f070041;
+        public static final int invite_friend_list_margin_left=0x7f070042;
+        public static final int invite_friend_list_margin_right=0x7f070043;
+        public static final int invite_friend_list_text_size=0x7f07003c;
+        public static final int invite_friend_margin_bottom=0x7f07003d;
+        public static final int invite_friend_small_text_size=0x7f07003b;
+        /**  Invite Facebook Friend 
+         */
+        public static final int invite_friend_text_top_margin=0x7f070039;
+        public static final int invite_other_friends_margin_bottom=0x7f07003e;
+        public static final int iv_show_type_height=0x7f070026;
+        public static final int iv_show_type_height_tablet=0x7f070028;
+        public static final int iv_show_type_width=0x7f070027;
+        public static final int iv_show_type_width_tablet=0x7f070029;
+        /**  in row of the listview 
+         */
+        public static final int language_margin_left=0x7f070023;
+        public static final int language_name_padding_bottom=0x7f07001f;
+        public static final int language_name_padding_left=0x7f070020;
+        public static final int language_name_padding_top=0x7f07001e;
+        /**  in languages selection page 
+         */
+        public static final int language_name_textSize=0x7f07001d;
+        public static final int masthead_height=0x7f07001c;
+        public static final int masthead_width=0x7f07001b;
+        public static final int new_cell_padding_bottom=0x7f070031;
+        /**  in news row 
+         */
+        public static final int new_cell_padding_top=0x7f070030;
+        public static final int padding_default=0x7f070013;
+        public static final int padding_small=0x7f070014;
+        public static final int padding_tiny=0x7f070015;
+        public static final int pager_dots_height=0x7f070011;
+        public static final int share_method_margin_left=0x7f070033;
+        /**  in channel info page 
+         */
+        public static final int share_method_textSize=0x7f070032;
+        public static final int share_row_height=0x7f070035;
+        public static final int share_row_padding=0x7f070034;
+        public static final int singer_text_size=0x7f07002b;
+        public static final int subtitle_padding=0x7f070037;
+        /**  Subtitle font size 
+         */
+        public static final int subtitle_size=0x7f070036;
+        public static final int tabitem_icon_size=0x7f070022;
+        /**  tab items 
+         */
+        public static final int tabitem_width=0x7f070021;
+        public static final int title_text_size=0x7f07002a;
     }
     public static final class drawable {
         public static final int ab_bottom_solid_globalcinema=0x7f020000;
@@ -965,22 +1043,23 @@ containing a value of this type.
         public static final int progress_horizontal_globalcinema=0x7f020079;
         public static final int progress_primary_globalcinema=0x7f02007a;
         public static final int progress_secondary_globalcinema=0x7f02007b;
-        public static final int retry_icon=0x7f02007c;
-        public static final int selectable_background_globalcinema=0x7f02007d;
-        public static final int spinner_ab_default_globalcinema=0x7f02007e;
-        public static final int spinner_ab_disabled_globalcinema=0x7f02007f;
-        public static final int spinner_ab_focused_globalcinema=0x7f020080;
-        public static final int spinner_ab_pressed_globalcinema=0x7f020081;
-        public static final int spinner_background_ab_globalcinema=0x7f020082;
-        public static final int tab_indicator_ab_globalcinema=0x7f020083;
-        public static final int tab_selected_focused_globalcinema=0x7f020084;
-        public static final int tab_selected_globalcinema=0x7f020085;
-        public static final int tab_selected_pressed_globalcinema=0x7f020086;
-        public static final int tab_unselected_focused_globalcinema=0x7f020087;
-        public static final int tab_unselected_pressed_globalcinema=0x7f020088;
+        public static final int rectangle_border=0x7f02007c;
+        public static final int retry_icon=0x7f02007d;
+        public static final int selectable_background_globalcinema=0x7f02007e;
+        public static final int spinner_ab_default_globalcinema=0x7f02007f;
+        public static final int spinner_ab_disabled_globalcinema=0x7f020080;
+        public static final int spinner_ab_focused_globalcinema=0x7f020081;
+        public static final int spinner_ab_pressed_globalcinema=0x7f020082;
+        public static final int spinner_background_ab_globalcinema=0x7f020083;
+        public static final int tab_indicator_ab_globalcinema=0x7f020084;
+        public static final int tab_selected_focused_globalcinema=0x7f020085;
+        public static final int tab_selected_globalcinema=0x7f020086;
+        public static final int tab_selected_pressed_globalcinema=0x7f020087;
+        public static final int tab_unselected_focused_globalcinema=0x7f020088;
+        public static final int tab_unselected_pressed_globalcinema=0x7f020089;
     }
     public static final class id {
-        public static final int ProgressBar01=0x7f040047;
+        public static final int ProgressBar01=0x7f040045;
         public static final int abs__action_bar=0x7f040022;
         public static final int abs__action_bar_container=0x7f040021;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -1022,24 +1101,22 @@ containing a value of this type.
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
         public static final int app_root=0x7f040033;
-        public static final int channel_alternative_title=0x7f040043;
         public static final int channel_list=0x7f040036;
         public static final int channel_name=0x7f040042;
-        public static final int channel_released_date=0x7f040044;
         public static final int channel_thumb=0x7f040041;
-        public static final int channel_video_list=0x7f040045;
+        public static final int channel_video_list=0x7f040043;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int empty_message=0x7f040035;
         public static final int fragment_main=0x7f040034;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
-        public static final int loading_text_msg=0x7f040048;
-        public static final int loadingpagination_error=0x7f040049;
-        public static final int loadingpagination_error_refresh_btn=0x7f04004b;
-        public static final int loadingpagination_error_text=0x7f04004a;
-        public static final int loadingpagination_loading=0x7f040046;
-        public static final int menu_settings=0x7f040050;
+        public static final int loading_text_msg=0x7f040046;
+        public static final int loadingpagination_error=0x7f040047;
+        public static final int loadingpagination_error_refresh_btn=0x7f040049;
+        public static final int loadingpagination_error_text=0x7f040048;
+        public static final int loadingpagination_loading=0x7f040044;
+        public static final int menu_settings=0x7f04004e;
         public static final int movie_genres=0x7f04003f;
         public static final int movie_info=0x7f040039;
         public static final int movie_information=0x7f040037;
@@ -1057,13 +1134,15 @@ containing a value of this type.
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
-        public static final int youtube_video_duration=0x7f04004e;
-        public static final int youtube_video_thumb=0x7f04004c;
-        public static final int youtube_video_title=0x7f04004d;
-        public static final int youtube_view=0x7f04004f;
+        public static final int youtube_video_duration=0x7f04004c;
+        public static final int youtube_video_thumb=0x7f04004a;
+        public static final int youtube_video_title=0x7f04004b;
+        public static final int youtube_view=0x7f04004d;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f080000;
+        public static final int grid_number_of_columns=0x7f080001;
+        public static final int grid_number_of_columns_aux=0x7f080002;
     }
     public static final class layout {
         public static final int abs__action_bar_home=0x7f030000;
@@ -1090,15 +1169,16 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030015;
         public static final int abs__simple_dropdown_hint=0x7f030016;
         public static final int activity_main=0x7f030017;
-        public static final int channel_fragment=0x7f030018;
-        public static final int channel_information=0x7f030019;
-        public static final int channel_item=0x7f03001a;
-        public static final int channel_videos_fragment=0x7f03001b;
-        public static final int loading_pagination=0x7f03001c;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
-        public static final int sherlock_spinner_item=0x7f03001e;
-        public static final int youtube_video_item=0x7f03001f;
-        public static final int youtube_view=0x7f030020;
+        public static final int channel_activity=0x7f030018;
+        public static final int channel_fragment=0x7f030019;
+        public static final int channel_information=0x7f03001a;
+        public static final int channel_item=0x7f03001b;
+        public static final int channel_videos_fragment=0x7f03001c;
+        public static final int loading_pagination=0x7f03001d;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
+        public static final int sherlock_spinner_item=0x7f03001f;
+        public static final int youtube_video_item=0x7f030020;
+        public static final int youtube_view=0x7f030021;
     }
     public static final class menu {
         public static final int activity_global_cinema_main=0x7f0b0000;
@@ -1231,10 +1311,10 @@ containing a value of this type.
         public static final int Theme_Sherlock_Light_Dialog=0x7f0a0058;
         public static final int Theme_Sherlock_Light_NoActionBar=0x7f0a0056;
         public static final int Theme_Sherlock_NoActionBar=0x7f0a0055;
-        public static final int Theme_globalcinema=0x7f0a005b;
+        public static final int Theme_globalcinema=0x7f0a005c;
         /**  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int Theme_globalcinema_widget=0x7f0a0063;
+        public static final int Theme_globalcinema_widget=0x7f0a0064;
         public static final int Widget=0x7f0a0000;
         public static final int Widget_Sherlock_ActionBar=0x7f0a0002;
         public static final int Widget_Sherlock_ActionBar_Solid=0x7f0a0003;
@@ -1282,13 +1362,14 @@ containing a value of this type.
         public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0a0034;
         public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0a0024;
         public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0a0032;
-        public static final int globalcinema_ActionBarTabStyle=0x7f0a0060;
-        public static final int globalcinema_DropDownListView=0x7f0a005f;
-        public static final int globalcinema_DropDownNav=0x7f0a0061;
-        public static final int globalcinema_PopupMenu=0x7f0a005e;
-        public static final int globalcinema_ProgressBar=0x7f0a0062;
-        public static final int globalcinema_solid_ActionBar=0x7f0a005c;
-        public static final int globalcinema_transparent_ActionBar=0x7f0a005d;
+        public static final int globalcinema_ActionBarTabStyle=0x7f0a0061;
+        public static final int globalcinema_DropDownListView=0x7f0a0060;
+        public static final int globalcinema_DropDownNav=0x7f0a0062;
+        public static final int globalcinema_PopupMenu=0x7f0a005f;
+        public static final int globalcinema_ProgressBar=0x7f0a0063;
+        public static final int globalcinema_solid_ActionBar=0x7f0a005d;
+        public static final int globalcinema_transparent_ActionBar=0x7f0a005e;
+        public static final int grid=0x7f0a005b;
     }
     public static final class styleable {
         /**  Attributes used to style the Action Bar. 

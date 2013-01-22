@@ -19,9 +19,11 @@
  */
 package com.omertron.themoviedbapi.model;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import java.io.Serializable;
+
 import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 /**
  *

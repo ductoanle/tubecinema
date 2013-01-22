@@ -19,11 +19,13 @@
  */
 package com.omertron.themoviedbapi.wrapper;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.omertron.themoviedbapi.model.Keyword;
-import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  *

@@ -1,15 +1,15 @@
 package com.ethan.globalcinema.loader;
 
-import com.ethan.globalcinema.api.TMDBApi;
-import com.ethan.globalcinema.beans.MovieItem;
-import com.ethan.globalcinema.utils.MessengerUtils;
-
 import android.content.Context;
 import android.os.Messenger;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-public class MovieInfoLoader extends AsyncTaskLoader<MovieItem> {
+import com.ethan.globalcinema.api.TMDBApi;
+import com.ethan.globalcinema.utils.MessengerUtils;
+import com.omertron.themoviedbapi.model.MovieDb;
+
+public class MovieInfoLoader extends AsyncTaskLoader<MovieDb> {
 	
 	private static final String TAG = "MovieInfoLoader";
 	
@@ -29,9 +29,9 @@ public class MovieInfoLoader extends AsyncTaskLoader<MovieItem> {
 	}
 
 	@Override
-	public MovieItem loadInBackground() {
+	public MovieDb loadInBackground() {
 		try{
-			MovieItem movie = TMDBApi.getInstance().getMovieInfo(movieId);
+			MovieDb movie = TMDBApi.getInstance().getMovieInfo(movieId);
 			if (movie != null){
 				MessengerUtils.sendMessage(callback, MessengerUtils.UPDATE_DONE);
 			}

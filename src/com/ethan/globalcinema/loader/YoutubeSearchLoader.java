@@ -17,12 +17,14 @@ public class YoutubeSearchLoader extends AsyncTaskLoader<List<YoutubeVideo>>{
     private static final String TAG = "YoutubeSearchLoader";
     
     private String query;
+    private int duration;
     private Messenger callback;
     
-    public YoutubeSearchLoader(Context context, String query, Messenger callback) {
+    public YoutubeSearchLoader(Context context, String query, int duration, Messenger callback) {
         super(context);
         this.query = query;
         this.callback = callback;
+        this.duration = duration;
     }
     
     @Override

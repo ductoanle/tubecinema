@@ -19,6 +19,26 @@
  */
 package com.omertron.themoviedbapi;
 
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_ADULT;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_COUNTRY;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_ID;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_LANGUAGE;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_PAGE;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_QUERY;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_SESSION;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_TOKEN;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_VALUE;
+import static com.omertron.themoviedbapi.tools.ApiUrl.PARAM_YEAR;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +66,6 @@ import com.omertron.themoviedbapi.model.TokenSession;
 import com.omertron.themoviedbapi.model.Trailer;
 import com.omertron.themoviedbapi.model.Translation;
 import com.omertron.themoviedbapi.tools.ApiUrl;
-import static com.omertron.themoviedbapi.tools.ApiUrl.*;
 import com.omertron.themoviedbapi.tools.FilteringLayout;
 import com.omertron.themoviedbapi.tools.WebBrowser;
 import com.omertron.themoviedbapi.wrapper.WrapperAlternativeTitles;
@@ -67,13 +86,6 @@ import com.omertron.themoviedbapi.wrapper.WrapperPersonCredits;
 import com.omertron.themoviedbapi.wrapper.WrapperReleaseInfo;
 import com.omertron.themoviedbapi.wrapper.WrapperTrailers;
 import com.omertron.themoviedbapi.wrapper.WrapperTranslations;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
 /**
  * The MovieDb API
