@@ -35,9 +35,9 @@ public class ChannelLoadActivity extends FragmentActivity implements LoaderCallb
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.channel_activity);
-		callLoader(0, false, null);
 		initResources();
 		loadMovie();
+		callLoader(0, false, null);
 	}
 
 	private void initResources() {
@@ -90,6 +90,7 @@ public class ChannelLoadActivity extends FragmentActivity implements LoaderCallb
 			Intent intent = new Intent(this, ChannelActivity.class);
 			intent.putExtra(ChannelActivity.MOVIE_EXTRA, (Parcelable)movie);
 			startActivity(intent);
+			finish();
 		}
 	}
 

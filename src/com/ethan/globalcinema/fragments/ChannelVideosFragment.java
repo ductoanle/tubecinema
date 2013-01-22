@@ -101,7 +101,7 @@ public class ChannelVideosFragment extends LoaderFragment implements LoaderCallb
     @Override
     public Loader<List<YoutubeVideo>> onCreateLoader(int loader, Bundle params) {
     	MovieDb movie = ((ChannelActivity)getActivity()).getMovie();
-        return new YoutubeSearchLoader(getActivity(), movie.getTitle(), movie.getRuntime(), new Messenger(new Handler(this)));
+        return new YoutubeSearchLoader(getActivity(), movie, new Messenger(new Handler(this)));
     }
     
     @Override

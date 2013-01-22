@@ -12,19 +12,20 @@ import com.ethan.globalcinema.api.YoutubeAPI;
 import com.ethan.globalcinema.beans.YoutubeVideo;
 import com.ethan.globalcinema.utils.MessengerUtils;
 import com.ethan.globalcinema.utils.Utils;
+import com.omertron.themoviedbapi.model.MovieDb;
 
 public class YoutubeSearchLoader extends AsyncTaskLoader<List<YoutubeVideo>>{
     private static final String TAG = "YoutubeSearchLoader";
     
     private String query;
     private int duration;
+    private MovieDb movie;
     private Messenger callback;
     
-    public YoutubeSearchLoader(Context context, String query, int duration, Messenger callback) {
+    public YoutubeSearchLoader(Context context, MovieDb movie, Messenger callback) {
         super(context);
-        this.query = query;
+        this.movie = movie;
         this.callback = callback;
-        this.duration = duration;
     }
     
     @Override
@@ -36,12 +37,13 @@ public class YoutubeSearchLoader extends AsyncTaskLoader<List<YoutubeVideo>>{
     @Override
     public List<YoutubeVideo> loadInBackground() {
         List<YoutubeVideo> videos = new ArrayList<YoutubeVideo>();
+        String type = movie.isAnimation() ? "animation" : "";
         try {
-            YoutubeVideo video = YoutubeAPI.getInstance().getTrailer(query);
+            YoutubeVideo video = YoutubeAPI.getInstance().getTrailer(movie.getTitle(), movie.getReleasedYear(), type);
             if (video != null) {
                 videos.add(video);
             }
-            video = YoutubeAPI.getInstance().getFullVideo(query);
+            video = YoutubeAPI.getInstance().getFullVideo(movie.getTitle(), movie.getOriginalTitle(), movie.getReleasedYear(), type, movie.getRuntime());
             if (video != null) {
                 videos.add(video);
             }

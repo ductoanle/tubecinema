@@ -19,6 +19,7 @@ public class ChannelActivity extends BaseActionBarActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		loadMovie();
+		getSherlockActionBar();
 		int position = 0;
 		if (savedInstanceState != null) {
 			position = savedInstanceState.getInt(CURRENT_SELECTED_TAB);
@@ -26,7 +27,6 @@ public class ChannelActivity extends BaseActionBarActivity {
 		if(movie!=null){
 			addTabs(position);
 		}
-		getSherlockActionBar();
 	}
 	
 	public void loadMovie(){

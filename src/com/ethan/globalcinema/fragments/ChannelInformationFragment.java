@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ethan.globalcinema.ChannelLoadActivity;
+import com.ethan.globalcinema.ChannelActivity;
 import com.ethan.globalcinema.R;
 import com.ethan.globalcinema.cache.SuperImageLoader;
 import com.omertron.themoviedbapi.model.MovieDb;
@@ -32,7 +32,7 @@ public class ChannelInformationFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		movie = ((ChannelLoadActivity)getActivity()).getMovie();
+		movie = ((ChannelActivity)getActivity()).getMovie();
 	}
 	
 	@Override

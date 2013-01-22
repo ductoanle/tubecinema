@@ -173,6 +173,15 @@ public class MovieDb implements Serializable, Parcelable {
 		}
 		return null;
 	}
+	
+	public boolean isAnimation() {
+	    for (Genre genre: genres) {
+	        if (genre.getName().toLowerCase().equals("animation")) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
     // <editor-fold defaultstate="collapsed" desc="Getter methods">
     public String getBackdropPath() {
